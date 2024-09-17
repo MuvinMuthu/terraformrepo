@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+    options {
+        // Timeout counter starts AFTER agent is allocated
+        timeout(time: 1, unit: 'SECONDS')
+    }
+    stages {
+        stage('Terraform init') {
+            steps {
+                echo 'Action of Terraform init'
+            }
+        }
+ stage('Terraform validate') {
+            steps {
+                echo 'Action of Terraform Validate'
+            }
+        }
+ stage('Terraform plan') {
+            steps {
+                echo 'Action of Terraform plan'
+            }
+        }
+ stage('Terraform apply') {
+            steps {
+                echo 'Action of Terraform apply'
+            }
+        }
+
+    }
+}
