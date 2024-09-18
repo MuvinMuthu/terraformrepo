@@ -4,7 +4,7 @@ pipeline {
         stage('Checkpoint') {
            steps{
 
-        checkout([$class: 'GitSCM', branches: [[name: '*/main]], extensions: [], userRemoteConfigs: [[url: '']]])'])
+        checkout([$class: 'GitSCM', branches: [[name: '*/main]], extensions: [], userRemoteConfigs: [[url: 'https://github.com/MuvinMuthu/terraformrepo.git']]])'])
                }
         }   
 
