@@ -1,0 +1,50 @@
+Steps to Downgrade Jenkins on AWS Linux
+Connect to Your Instance: Use SSH to connect to your AWS instance where Jenkins is installed.
+
+ssh -i your-key.pem ec2-user@your-instance-public-dns
+Stop the Jenkins Service: Before making any changes, stop the Jenkins service.
+
+
+sudo systemctl stop jenkins
+Backup Jenkins Data: It's always a good idea to back up your Jenkins data before making changes. This usually resides in /var/lib/jenkins.
+
+
+sudo cp -r /var/lib/jenkins /var/lib/jenkins_backup
+Remove the New Version of Jenkins: You can uninstall the current Jenkins version. The command may vary based on how you installed Jenkins.
+
+
+sudo yum remove jenkins
+or if you used apt:
+
+
+sudo apt-get remove jenkins
+Download the Specific Version of Jenkins: Find the specific version you want to install. You can download the .war file directly or use a package manager. Here's how to download a specific .rpm file (if using CentOS/RHEL):
+
+
+wget http://pkg.jenkins.io/redhat-stable/jenkins-<version>.rpm
+Replace <version> with the desired version number.
+
+Install the Specific Version of Jenkins:
+
+sudo yum localinstall jenkins-<version>.rpm
+or for Debian/Ubuntu:
+
+sudo dpkg -i jenkins_<version>.deb
+Start the Jenkins Service:
+
+
+sudo systemctl start jenkins
+Verify the Installation: Check if Jenkins is running and accessible. Open your browser and go to http://your-instance-public-dns:8080.
+
+Restore Data (if necessary): If you need to restore any configuration or jobs, you can copy them from the backup directory.
+
+
+sudo cp -r /var/lib/jenkins_backup/* /var/lib/jenkins/
+Check Jenkins Logs: Review the Jenkins logs for any issues.
+
+sudo cat /var/log/jenkins/jenkins.log
+
+Important Notes:
+Be cautious about compatibility between Jenkins versions and any plugins you may have installed.
+Make sure to check the official Jenkins documentation for any specific version-related instructions or dependencies.
+After downgrading, ensure that everything is functioning as expected.
