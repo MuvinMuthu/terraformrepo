@@ -1,10 +1,13 @@
 pipeline {
     agent any
-    options {
-        // Timeout counter starts AFTER agent is allocated
-        timeout(time: 1, unit: 'SECONDS')
-    }
-    stages {
+        stages {
+        stage('Checkpoint') {
+           steps{
+
+        checkout([$class: 'GitSCM', branches: [[name: '*/main]], extensions: [], userRemoteConfigs: [[url: '']]])'])
+               }
+        }   
+
         stage('Terraform init') {
             steps {
                 echo 'Action of Terraform init'
